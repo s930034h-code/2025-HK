@@ -24,7 +24,7 @@ export interface Expense {
   item: string;
   originalAmount: number; // 使用者輸入的原始金額
   currency: 'HKD' | 'TWD'; // 使用者輸入的幣別
-  amountHKD?: number; // 計算後的港幣 (可選)
+  amountHKD?: number; // 計算後的港幣 (可選，為了相容性保留)
   amountTWD?: number; // 計算後的台幣 (可選)
   paidBy: string; // 誰付的錢
   beneficiaries: string[]; // 這筆錢是幫誰付的 (分帳用)
