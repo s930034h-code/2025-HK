@@ -7,7 +7,7 @@ import { Plus, Trash2, Calculator, Wallet, CreditCard, Banknote, Wifi, Smartphon
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 
 const COLORS = ['#F08A5D', '#B83B5E', '#6A2C70', '#44403C'];
-const DEFAULT_RATE = 4.15; // 預設匯率，會被 Firebase 設定覆蓋
+const DEFAULT_RATE = 4.15; // 預設匯率
 
 const PaymentIconMap = {
   cash: <Banknote className="w-3 h-3" />,
@@ -56,7 +56,7 @@ const ExpenseTracker: React.FC = () => {
         const expenseList = Object.entries(data).map(([key, value]: [string, any]) => ({
           id: key,
           ...value,
-          currency: value.currency || 'HKD', // 兼容舊資料
+          currency: value.currency || 'HKD', // 兼容舊資料預設 HKD
           originalAmount: value.originalAmount || value.amountHKD || 0, // 兼容舊資料
           beneficiaries: value.beneficiaries || []
         }));
@@ -73,7 +73,7 @@ const ExpenseTracker: React.FC = () => {
       if (data) {
          const userList = Object.values(data) as string[];
          setUsers(userList);
-         // Set default payer if "Me" is not valid or just init
+         // 如果目前選的付款人不在列表內（且不是初始狀態），重置為第一個人
          if (userList.length > 0 && paidBy === 'Me') setPaidBy(userList[0]);
       }
     });
